@@ -1,0 +1,34 @@
+\section{Introduction}
+\subsection{Project Vision}
+%Skrive om litt
+Exploration and mapping has been an important part in the field of robotics for many years. In order to create fully autonomous systems, one often needs to be able to identify the surrounding environment. In mapping, camera sensors are often used to collect a great amount of environmental variable data, and only the relevant pieces of information should be extracted.XXX \\
+
+The vision of this thesis is to contribute towards developing a detection and mapping platform mounted on an unmanned aerial vehicle capable of mapping a maze from the air. Is it possible to develop such a system using only relatively cheap off-the shelf hardware? 
+
+\newpage
+\subsection{Project Overview}
+There has been an ongoing effort since 2004 to create a system of LEGO-robots capable of the exploration and mapping of a maze. Using only cheap off-the shelf hardware and through the design of algorithms for exploration, mapping and communication the LEGO-robots have become proficient in mapping and exploring. One of the biggest issues in the current implementation of the LEGO-robots is the accuracy.\\
+
+In an attempt to improve the overall accuracy of the maze mapping, it has been proposed that the use of a camera sensor capable of detecting and mapping the maze can compliment the existing implementation and improve its accuracy. We envision a different mapping system from the LEGO-robots, where an image sensor together with an image processing capable computer is mounted on an unmanned aerial vehicle (UAV, drone).\\
+
+Some work has been done in the image processing part of this new mapping system in the project report Bjørnsen fall 2016\cite{kris}, where an algorithm for detecting and mapping the maze was developed in Matlab. To further develop this system, this thesis seeks to implement the mapping algorithm on a hardware solution suitable for my application. 
+
+\newpage
+
+\subsection{Report Structure}
+Here is a brief description of the contents of each chapter:
+
+\begin{itemize}
+\item \textbf{Chapter 1 - Introduction}
+\item \textbf{Chapter 2 - Theory.} Covers the theoretical basis needed in image processing, mapping and the theory behind the sensors used in the system. This seeks to lay the foundation for the application.
+\item \textbf{Chapter 3 - Hardware Specification.} Covers the hardware used in the thesis, and the specification of each piece of hardware. 
+\item \textbf{Chapter 4 - Hardware Implementation.} Covers the setup of the hardware used in the system. 
+\item \textbf{Chapter 5 - Software Implementation.} Covers the implementation of the mapping algorithm in Python. This includes the translation of the algorithm developed in the project report\cite{kris}. %Includerer mer
+\item \textbf{Chapter 6 - Testing}
+\item \textbf{Chapter 7 - Sources of error}
+\item \textbf{Chapter 8 - Discussion}
+\item \textbf{Chapter 9 - Conclusion}
+\item \textbf{Chapter 10 - Further work}
+\end{itemize}
+
+
