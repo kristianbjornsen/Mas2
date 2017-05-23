@@ -95,20 +95,7 @@ After this it applies a non-maximum suppression technique to the gradient magnit
 
 The last part of the algorithm is to use double thresholding to determine strong and weak edges. Edges with intensity values below the lowest threshold are suppressed, which is noise in most cases. This is a tuning parameter and needs to be determined empirically. The last step of the algorithm also involves tracking edges and conducting a connectivity analysis to detect and link edges together, where edges that are weak and not connected to strong edges are suppressed.\\
 
-\newpage
-%Skal jeg ha med dette?
-\subsection{Image pre-processing before Edge detection}
-There are a number of different techniques and methods one can employ before using an edge detection algorithm to get a better edge detection result.
-\subsubsection{Correcting Nonuniform Illumination}
-Depending on the lighting conditions in the image, it might be beneficial to correct for nonuniform illumination. This can be done in several ways, but the most normal being estimate the background illumination of the image, inverse it and subtract it from the original image.
-\subsubsection{Smoothing}
-Smoothing is beneficial to suppress noise in the image. This can be done by applying a Gaussian filter to the image, which described previously in some of the edge detection algorithms. Smoothing is a part of some of the edge detection algorithms, which is designed to suppress noise.
-\subsubsection{Increase contrast}
-Increasing contrast can help in the detection of edges in an image. This is done by saturating the top and bottom $1\%$ of intensity values in the image. In the implementation described later in the report, this is utilized to improve the edge detection algorithm.
-\subsubsection{Re-sizing}
-By re-sizing the image by a scale factor the image will be smoothed. Some edge detection algorithms work better with images that are scaled down and smoothed. This is described later in Section \ref{testing}, and how this affects edge detection and edge linking quality.
-%-----------
-
+The Canny algorithm is the method employed later in the implementation, and is the fundamental edge detection method used in this paper.
 \newpage
 \subsection{Edge Linking}
 %Skrive slik som vi gjør det i OpenCV
@@ -134,11 +121,12 @@ By using Hough transform the length of each wall segment can be extracted in pix
 %-----------
 
 \subsection{Mapping}
+This section is from Bjørnsen 2016\cite{kris}\\
+
 \label{ch:mapping}
 The primary goal in this project is to be able to map a maze. Techniques explained previously lays the ground work for how we are able to extract useful information from the image to be used for mapping. In addition to the information extracted by the image, we need some additional information for mapping:
 \begin{itemize}
 \item Height $H_{tot}$ above ground the image was taken from as well as x-y position
-\item The orientation of the image sensor
 \item Assume we know the height of the walls $H_w$
 \item Information about the image sensor (pixel pitch $p$ and focal length $f$)
 \end{itemize}
@@ -183,6 +171,7 @@ If we have the position of the center $(x_c,y_c)$ and the start- and end point o
 Since we know the start and end point coordinates in real life units of all wall segments, we have all the information we need to express the characterization of the maze. We assume we know the orientation of the image sensor when the image is taken, giving us a complete characterization of where each wall segment is in the real world. \\
 
 It is important to note that I am not calculating or implementing the orientation of the image sensor when the image is taken. It is assumed we have a measurement of the orientation about an inertial axis in the ground- and wall plane, so that the mapping directly relates to this inertial frame. This means that we require the UAV to measure the attitude when mapping the maze.
+
 
 
 

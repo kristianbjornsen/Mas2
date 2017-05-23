@@ -1,4 +1,5 @@
 \subsection{Ultrasonic range sensor}
+\label{urs}
 In order to calculate a GSD, the system needs a way to measure the distance from the camera to the ground. This information can be obtained by using an ultrasonic range sensor. \\
 
 The ultrasonic range sensor utilizes high-frequency sound wave pulses to determine the range from the sensor to the object reflecting the pulse back to the sensor. The sensor outputs the time taken from the sound transmission to the detection of the reflected signal, and is then used to calculate the distance from the sensor to the object.\\
@@ -23,7 +24,7 @@ In dry air at 20 C, the speed of sound is 343 meters per second \cite{sos}. The 
 \newpage
 
 \subsection{Image Sensor}
-The image sensor is one of the most important components in the system. There are several different types of image sensors available, but most of the image sensors we will use consist of an array of small sensors capable of detecting incoming illumination energy and transforming it to digital images.\\
+The image sensor is one of the most important components in the system. There are several different types of image sensors available, but most of the image sensors I will use consist of an array of small sensors capable of detecting incoming illumination energy and transforming it to digital images.\\
 
 Gonzales explains the process of the digital image sensor as follows: \emph{"The idea is simple: Incoming energy is transformed into a voltage by the combination of input electrical power and sensor material that is responsive to the particular type of energy (wavelength) being detected. The output voltage waveform is the response of the sensors, and a digital quantity is obtained from each sensor by digitizing its response."}\cite{g}\\
 
@@ -58,7 +59,7 @@ Figure \ref{fig:cmos} depicts an APS CMOS image sensor. CMOS is one of the leadi
 
 \newpage
 \subsection{Technical hardware requirements}
-If a complete image processing algorithm is to be implemented on a mobile computation device, the hardware selected needs to be able to compute and run image processing in a timely manner. Image processing is known to be demanding on hardware, and most advanced implementations such as autonomous cars use high-end dedicated graphic cards \cite{tesla} to be able to run in real time. The algorithm we are implementing does not map in real time, thus the requirements for our hardware performance is reduced. Our hardware should feature enough processing power and storage to be able to run the image processing algorithm as well as storing the image in between operations.\\
+If a complete image processing algorithm is to be implemented on a mobile computation device, the hardware selected needs to be able to compute and run image processing in a timely manner. Image processing is known to be demanding on hardware, and most advanced implementations such as autonomous cars use high-end dedicated graphic cards \cite{tesla} to be able to run in real time. The algorithm I am implementing does not map in real time, thus the requirements for our hardware performance is reduced. Our hardware should feature enough processing power and storage to be able to run the image processing algorithm as well as storing the image in between operations.\\
 
 These are some of the over-arching hardware requirements:
 \begin{itemize}
@@ -79,6 +80,37 @@ I assume the image file size is at a maximum $10$ Megabytes for calculation purp
 
 %Litt mer
 
+\newpage
+\subsection{Positioning of the system}
+In the problem description of this paper, the following is stated:
+\begin{center}
+\emph{"Determine how information such as attitude, height and position can be extracted from the drone, and what the difficulties are with respect to the accuracy of this information"}
+\end{center}
+
+There are several potential solutions available to be able to extract useful positional data from a drone. The determining factor in positioning is its accuracy, and if the positioning needs to be indoors or outdoors. 
+
+\subsubsection{Pure IMU based positioning}
+This is the most simple and cheapest potential solution to positioning. One would think using an inertial measurement unit (IMU) some useful information about position could be extracted, but this is rarely the case.\\
+
+IMU works great when measuring orientation, this is because it uses a gyroscope to measure linear velocity, and integrate it once to get orientation. There is some linear drift in there, but since I can measure the magnetic north and the gravity vector, it can be corrected for.\\
+
+This not true for positional tracking. In order to track the position, the accelerometers needs to be used to measure acceleration, as opposed to linear velocity. The acceleration needs to be integrated twice to get the position. And thus the big issue occurs when integrating twice, since you are not accumulating error in the linear fashion, but in the quadratic fashion. That means the drift will always increase, thus making it not suitable for positioning.\cite{robot}\\
+
+During the initial phases of this paper, a meeting was conducted with a researcher at the  Department of Engineering Cybernetics together with my advisor. The researcher confirmed the fact that IMU positioning is not feasible for the paper, and that other avenues should be evaluated.
+
+\subsubsection{GPS positioning}
+If the drone is designed to operate outdoors, GPS positioning is a great way to control the drone. GPS positioning is the most commercially technology available in autopilots for drones, and is used in many different applications. One major disadvantage in this technology is that it performs poorly indoors, thus making it only accurate for outdoor use.\\
+
+By the use of triangulation between at least three satellites, the position can be extracted in three dimensions. GPS chips are available in very small sizes and range from very cheap off-the shelf hardware to expensive dedicated GPS with high accuracy.\\
+
+Many drone autopilots feature a built-in GPS chip that provides position relatively accurate, making the operator able to control the drones position. The system which I am working on is meant to be used indoors, so GPS positioning would not be a good solution to the positioning needs of the system.
+
+\subsubsection{Camera assisted indoor positioning}
+Camera assisted positioning can be many things, but what I mean by this is an array of cameras providing positioning by detecting an element in the images captured by the cameras. A system similar to this is implemented on NTNU in the B333 "Bevegelseslab" room in the Electronics Department.\\
+
+The system works by having several cameras placed at different locations in a room detect an object from different angles, and then place this object in a 3D reference frame in relation to a coordinate system selected by the user by triangulation. This system provides a very accurate position estimate, as well as a very accurate orientation estimate, but is often very expensive to implement because of the hardware required.\\
+
+In most cases, such a system is used for testing purposes, where a position- or orientation estimator is compared to the position and orientation provided by the camera system. This is because the camera system will provide a very accurate position in three dimensions.
 
 
 

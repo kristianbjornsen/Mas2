@@ -1,0 +1,41 @@
+\section{Further Work}
+There are many aspects of the final project vision that has not been implemented in this paper, and which opens up possibilities for many student papers. Below are some of the suggested improvements and expansions to the project.
+
+
+\subsection{Bluetooth Communication}
+The ideal communication platform for the application is Bluetooth Low Energy (BLE), and is currently used by the existing LEGO robot implementation. The existing solution uses an Nordic Semiconductor nRF51 Dongle\cite{nrf51} on each mapping robot and on the server itself. This has facilitated for an easy implementation of the respective robots, since the nRF51 is communicating with the same hardware. The Raspberry Pi has a different BLE chip, and thus the implementation of the communication was more difficult to make work.
+
+\subsubsection{Technical Issue}
+Since the software written on the communication in the existing LEGO robots uses a Nordic Semiconductor BLE chip, a special Nordic Semiconductor UUID is hard-coded into the server software. The server application only detects the special UUID, which is different from the Raspberry Pi UUID. This means to solve this issue, a student must invest time in both the existing server implementation and the Raspberry Pi implementation. 
+
+\subsection{Mobile Power Supply}
+In order to make the system completely mobile, then a power supply locally on a drone should be implemented. By using a drone battery to power the Raspberry Pi the system will be able to be operated mounted on a drone. 
+\begin{itemize}
+\item Implement a battery powered Raspberry Pi
+\item Make the system completely mobile
+\item Can the image processing still be done locally on the Pi?
+\end{itemize}
+
+\subsection{Develop a Drone}
+Perhaps the most exciting part of the system will be to develop a drone suitable for the system. Things to keep in mind:
+\begin{itemize}
+\item Size
+\item Indoor use
+\item Positioning of the drone (very important and difficult)
+\end{itemize}
+
+I would recommend the purchase of an off-the-shelf drone, as well as an off-the-shelf autopilot with an open source-code. 
+
+\subsection{Implementation of Positioning}
+This is closely tied with the development of the drone, but this will require the student to implement positioning on both the drone hardware and in the Raspberry Pi software code.
+\begin{itemize}
+\item Hardest problem: Indoor positioning
+\item Command structure (protocol)
+\item Merge with the LEGO robot server
+\end{itemize}
+
+
+
+
+
+
